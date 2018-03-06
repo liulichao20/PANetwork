@@ -13,16 +13,16 @@ class PANetworkManager {
     
     var manager:AFHTTPSessionManager!
     static let `default`:PANetworkManager = {
-        let manager:PANetworkManager = PANetworkManager()
-        return manager
+       return  PANetworkManager()
     }()
     var lock:NSRecursiveLock = NSRecursiveLock()
     var requestRecords:[Int:PARequest] = [:]
     var allStatusCodes:IndexSet = IndexSet(integersIn: Range(NSMakeRange(100, 500))!)
-    let networkConfig = PANetworkConfig.default
+    let networkConfig:PANetworkConfig!
     
     init() {
-        let config = URLSessionConfiguration()
+        networkConfig = PANetworkConfig.default
+        let config = URLSessionConfiguration.ephemeral
         config.timeoutIntervalForRequest = networkConfig.requestTimeoutInterval
         config.httpAdditionalHeaders = networkConfig.defaultHTTPHeaders
         
@@ -156,7 +156,7 @@ class PANetworkManager {
         }
         
         var dataTask:URLSessionDataTask? = nil
-        dataTask = manager.dataTask(with: urlRequest as URLRequest) { [weak self,weak dataTask](response, responseObject, resultError) in
+        dataTask = manager.dataTask(with: urlRequest as URLRequest) { [weak self](response, responseObject, resultError) in
             self?.handleRequestResult(task:dataTask ,response: response, responseObject: responseObject, error: resultError)
         }
         return dataTask

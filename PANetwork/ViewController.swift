@@ -13,6 +13,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let request = PARequest()
+        request.requestUrl = "https://httpbin.org/get"
+        request.requestMethod = .get
+        request.completionBlock = {
+            response in
+            print(response.responseObject)
+        }
+        request.start()
     }
 }
 

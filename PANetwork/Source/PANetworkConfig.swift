@@ -43,10 +43,7 @@ class PANetworkConfig: NSObject {
     var requestInterceptor:PARequestInterceptor?//请求拦截器 统一处理
     var responseInterceptor:PAResponseInterceptor?//响应拦截器 统一处理
     
-    static let `default`:PANetworkConfig = {
-       let config = PANetworkConfig()
-        return config
-    }()
+    static let `default`:PANetworkConfig = PANetworkConfig()
 }
 
 protocol PARequestInterceptor {
