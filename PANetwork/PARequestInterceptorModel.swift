@@ -29,7 +29,7 @@ class PARequestInterceptorModel: PARequestInterceptor {
             if !requestUrl.isEmpty {
                 if let url = URL(string: requestUrl),url.scheme != nil ,url.host != nil {
                     //添加到requesturl上
-                    
+                    print(url.absoluteString)
                 }else {
                     //baseurl + requesturl
                     if let renativeUrl = URL(string: requestUrl, relativeTo: URL(string: PANetworkConfig.default.baseUrl ?? "")) {
