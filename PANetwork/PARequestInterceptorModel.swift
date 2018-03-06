@@ -39,8 +39,6 @@ class PARequestInterceptorModel: PARequestInterceptor {
             }else {
                 requestUrl = PANetworkConfig.default.baseUrl ?? ""
             }
-            
-            
             var component = URLComponents(string: requestUrl)
             if let query = component?.query {
                 component?.query = "\(query)&\(compStr)"
