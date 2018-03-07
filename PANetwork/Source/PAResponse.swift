@@ -11,7 +11,6 @@ import UIKit
 class PAResponse:NSObject {
     var urlResponse:URLResponse?
     var responseObject:Any?
-    var responseJsonObject:Any?
     var error:PAError?
     var isResponseSuccess:Bool = false
     var isRequestSuccess:Bool = false
@@ -26,6 +25,9 @@ class PAResponse:NSObject {
             }
         }else if error != nil {
             self.error = PAError(errorMessage: PAError.commonErrorMessage)
+        }
+        if self.error != nil {
+            isRequestSuccess = true
         }
     }
     

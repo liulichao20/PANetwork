@@ -65,6 +65,14 @@ class PARequest {
         }
     }
     
+    func setConstructingBodyBlock(image:UIImage,quality:CGFloat = 0.5) {
+        let data = UIImageJPEGRepresentation(image, quality)
+        self.constructingBodyBlock = {
+            formData in
+            formData.appendPart(withFileData: data!, name: "image", fileName: "image", mimeType: "image/jpeg")
+        }
+    }
+    
     func stop() {
         PANetworkManager.default.cancelRequest(request: self)
     }
@@ -73,6 +81,23 @@ class PARequest {
         completionBlock = nil
         constructingBodyBlock = nil
         delegate = nil
+    }
+}
+
+extension PARequest {
+    @discardableResult
+    class func start(method:PARequestMethod = .post,requestUrl:String?,image:UIImage? = nil,quality:CGFloat = 0.5,requestParams:[String:Any]? = nil,hudBlock:PAHudBlock? = nil,completionBlock:PARequestCompletionBlock? = nil)->PARequest {
+        let request = PARequest()
+        request.requestParams = requestParams
+        request.requestUrl = requestUrl
+        request.requestMethod = method
+        request.hudBlock = hudBlock
+        request.completionBlock = completionBlock
+        if image != nil {
+            request.setConstructingBodyBlock(image: image!, quality: quality)
+        }
+        request.start()
+        return request
     }
 }
 

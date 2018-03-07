@@ -174,7 +174,6 @@ class PANetworkManager {
             return
         }
         let responseModel:PAResponse = PAResponse(urlResponse: response, responseObject: responseObject, error: error)
-        responseModel.isRequestSuccess = true 
         
         if let responseInterceptor = request.responseInterceptor {
             responseInterceptor.responseInterceptor(response: responseModel)

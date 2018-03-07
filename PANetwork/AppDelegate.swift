@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        let networkConfig = PANetworkConfig.default
         networkConfig.baseUrl = "http://www.baidu.com"
-        networkConfig.requestInterceptor = nil
+        networkConfig.requestInterceptor = PARequestInterceptorModel()
         networkConfig.responseInterceptor = PAResponseInterceptorModel()
         
         return true

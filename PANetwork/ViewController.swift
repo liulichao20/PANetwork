@@ -12,15 +12,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let request = PARequest()
-        request.requestUrl = "https://httpbin.org/get"
-        request.requestMethod = .get
-        request.completionBlock = {
-            response in
-            print(response.responseObject)
+ 
+        PARequest.start(method: .get, requestUrl: "https://httpbin.org/get", hudBlock: { (flag) in
+            if flag {
+                print("show hud")
+            }else {
+                print("hide hud")
+            }
+        }) { (response) in
+            print(response.responseObject!)
         }
-        request.start()
     }
 }
 

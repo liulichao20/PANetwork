@@ -11,10 +11,13 @@ import UIKit
 class PAResponseInterceptorModel: PAResponseInterceptor {
     func responseInterceptor(response: PAResponse) {
         if response.isRequestSuccess {
-            //解析model
-            
             //通用的拦截
-            
+            //解析model
+            if let _ = response.responseObject {
+                if let _ = response.responseDic {
+                    response.isResponseSuccess = true
+                }
+            }
         }
     }
 }

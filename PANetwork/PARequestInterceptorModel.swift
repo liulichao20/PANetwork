@@ -13,7 +13,9 @@ class PARequestInterceptorModel: PARequestInterceptor {
         let dict = ["version":"1.1.1","time":"2016.1.1"]
         //请求拦截
         if request.requestMethod == .post {
-            //添加参数到paramaters上
+            if !dict.isEmpty && request.requestParams == nil {
+                request.requestParams = [:]
+            }
             for (key,value) in dict {
                 request.requestParams?.updateValue(key, forKey: value)
             }
